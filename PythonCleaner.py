@@ -4,7 +4,7 @@ from tkinter import *
 from tkinter import ttk, filedialog
 
 def browseFiles():
-    filename = filedialog.askopenfilename(initialdir = "/", title = "Select a File", filetypes = (("Python files", "*.py*"), ("all files", "*.*")))
+    filename = filedialog.askopenfilename(initialdir = "/", title = "Select a File", filetypes = (("Python files", "*.py"), ("all files", "*.*")))
     return filename
     
 def main():
