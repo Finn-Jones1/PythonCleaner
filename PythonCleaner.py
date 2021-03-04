@@ -22,7 +22,6 @@ def main():
             if deldic["print"] == 1:
                 if "print" not in line:
                     python.write(line)
-            python.truncate()
 
         for line in script:
             print(deldic["comment"])
