@@ -6,41 +6,32 @@ def browseFiles():
     return filename
   
 def main():
-    deldic = {"print":[], "comment":[]}
-    deldic["print"].append(printR.get())
-    deldic["comment"].append(commentR.get())
+    fileName = browseFiles()
+    if printR.get() == 1:
 
+        targetFile = open(fileName,"r+")
 
-    
-    with open(browseFiles(),"r+") as python:
-        script = python.readlines()
-        python.seek(0)
+        script = targetFile.readlines()
+        targetFile.seek(0)
+        if "print" not in line:
+            for line in script:
+                    targetFile.write(line)
+            targetFile.truncate()
 
-        
+    if commentR.get() == 1:
+        targetFile = open(fileName,"r+")
+        script = targetFile.readlines()
+        targetFile.seek(0)
         for line in script:
-            print(deldic["print"])
-            if deldic["print"] == 1:
-                if "print" not in line:
-                    python.write(line)
-
-        for line in script:
-            print(deldic["comment"])
-            if deldic["comment"] == 1:
-                if "#" not in line:
-                    python.write(line)
-            python.truncate()
-
+                targetFile.write(line)
+        targetFile.truncate()
 
 window = tk.Tk()
 window.geometry('200x100')
 window.title('Select a file')
-printR = IntVar()
 commentR = IntVar()
 
 
-checkComments = Checkbutton(window, text="print", variable = commentR)
-checkPrint = Checkbutton(window, text="comments(#)", variable = printR)
-print(printR.get())
 
 button = tk.Button(window, text="Select and Clean", command=main)
 checkComments.place(x=10, y = 40)
