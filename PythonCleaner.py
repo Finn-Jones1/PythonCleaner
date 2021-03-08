@@ -2,7 +2,7 @@ import os
 import tkinter as tk
 from tkinter import ttk, filedialog, Checkbutton, IntVar
 def browseFiles():
-    filename = filedialog.askopenfilename(initialdir = "/Users/finnw/Documents/GitHub/", title = "Select a File", filetypes = (("Python files", "*.py"), ("all files", "*.*")))
+    filename = filedialog.askopenfilename(initialdir = "/", title = "Select a File", filetypes = (("Python files", "*.py"), ("all files", "*.*")))
     return filename
   
 def main():
@@ -14,7 +14,7 @@ def main():
         script = targetFile.readlines()
         targetFile.seek(0)
         for line in script:
-            if "print" not in line:
+            if line.lstrip().startswith("print(") == False:
 
                 targetFile.write(line)
             targetFile.truncate()
@@ -24,7 +24,7 @@ def main():
         script = targetFile.readlines()
         targetFile.seek(0)
         for line in script:
-            if "#" not in line:
+            if line.lstrip().startswith("#") == False:
                     targetFile.write(line)
             targetFile.truncate()
 
@@ -35,7 +35,6 @@ printR = IntVar()
 commentR = IntVar()
 checkComments = Checkbutton(window, text="print", variable = commentR)
 checkPrint = Checkbutton(window, text="comments(#)", variable = printR)
-print(printR.get())
 button = tk.Button(window, text="Select and Clean", command=main)
 checkComments.place(x=10, y = 40)
 checkPrint.place(x=10, y = 70)
