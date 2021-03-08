@@ -7,15 +7,16 @@ def browseFiles():
   
 def main():
     fileName = browseFiles()
+    targetFile = open(fileName,"r+")
+
     if printR.get() == 1:
-
         targetFile = open(fileName,"r+")
-
         script = targetFile.readlines()
         targetFile.seek(0)
-        if "print" not in line:
-            for line in script:
-                    targetFile.write(line)
+        for line in script:
+            if "print" not in line:
+
+                targetFile.write(line)
             targetFile.truncate()
 
     if commentR.get() == 1:
@@ -23,19 +24,20 @@ def main():
         script = targetFile.readlines()
         targetFile.seek(0)
         for line in script:
-                targetFile.write(line)
-        targetFile.truncate()
+            if "#" not in line:
+                    targetFile.write(line)
+            targetFile.truncate()
 
 window = tk.Tk()
 window.geometry('200x100')
 window.title('Select a file')
+printR = IntVar()
 commentR = IntVar()
-
-
-
+checkComments = Checkbutton(window, text="print", variable = commentR)
+checkPrint = Checkbutton(window, text="comments(#)", variable = printR)
+print(printR.get())
 button = tk.Button(window, text="Select and Clean", command=main)
 checkComments.place(x=10, y = 40)
 checkPrint.place(x=10, y = 70)
-
 button.place(x=50, y=10)
 window.mainloop()
